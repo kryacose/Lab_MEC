@@ -1,0 +1,21 @@
+simulate the folowing no premetive problems to find turn around time and waiting time
+    FCFS
+    SJF
+    RR(premptive)
+    priority
+
+simulate the folowing disk scheduling algos:
+    FCFS
+    scan
+    Cscan
+
+implement bankers algo for deadlock avoidamce
+
+simulate the folowing 3 optimization techniques:
+    single level directory
+    2 level directory
+    heirarchical 
+    
+implement producer consumer problem using semaphores:
+
+write a program to simulate the working of dining philosiphers problem
