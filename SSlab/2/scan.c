@@ -5,7 +5,7 @@ void sort(int n, int a[])
 {
     int t;
 
-    for(int i=0;i<n;i++)
+    for(int i=0;i<n;i++)    
     {
         for(int j=0;j<n-i-1;j++)
             if(a[j]>a[j+1])
@@ -19,9 +19,9 @@ void sort(int n, int a[])
 
 int main()
 {
-    int n, a[30], h, total = 0, max, pos = 0, i;
+    int n, a[30], h, total = 0, max, pos = 0, i, dir;
 
-    printf("\nNo of head position: ");
+    printf("\nMax positions: ");
     scanf("%d",&max);
 
     printf("Enter position of head: ");
@@ -40,21 +40,29 @@ int main()
 
     printf("Disk Head Movement:\n");
     while(a[pos] != h) pos++;
+
+    if(pos == 0) dir = 1;
+    else if(pos == n) dir = -1;
+    else dir = (a[pos+1]-a[pos])<=(a[pos]-a[pos-1]) ? 1 : -1;
     
-    for(i=pos;i<=n;i++)
+    for(i=pos;i<=n && i>=0 ;i+=dir)
         printf("%d --> ",a[i]);
     
 
-    if(a[i-1] != max-1)
+    if(dir==1 && a[i-1] != max-1)
         printf("%d --> ",max-1);
 
-    total += max-1 - h;
+    if(dir==-1 && a[0] != 0)
+        printf("%d --> ",0);
 
-    for(i=pos-1;i>=0;i--)
+
+    total += abs((dir==1?max-1:0) - a[pos]);
+    // printf("TOTAL %d  ,",(dir==1?max-1:0) - a[pos]);
+    for(i=pos-dir;i>=0 && i<=n;i-=dir)
         printf("%d --> ",a[i]);
 
-    if(pos != 0)
-        total += max-1 - a[0];
+    if(h!=0 && h!=max-1)
+    total += abs((dir==1?199:0) - a[i+dir]);
 
     printf("\nTotal disk head movement: %d\n\n", total);
 }

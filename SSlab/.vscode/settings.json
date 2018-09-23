@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "algorithm": "c",
+        "chrono": "c",
+        "limits": "c",
+        "complex": "c",
+        "cstdlib": "c"
+    }
+}
