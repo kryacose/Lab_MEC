@@ -77,7 +77,7 @@ int main()
             {   
                 printf("need < available, executed\n");
                 for(int i=0;i<3;i++)
-                    available[i]+=need[x][i];
+                    available[i]+=allocation[x][i];
                 printf("   new Available\n    A  B  C\n   %d  %d  %d\n", available[0], available[1], available[2]);
 
                 completed[ncomp] = x;
