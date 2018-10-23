@@ -131,9 +131,9 @@ void print_currdir(struct dir *x[]){
 void display_dir(struct dir *x){
     printf("    Name: %s\n", x->name);
     printf("    SubDirectories:\n");
-    for(int i=0; i<x->n_dir; i++) printf("       %s\n", x->subdir[i]->name);
+    for(int i=0; i<x->n_dir; i++) printf("          %s\n", x->subdir[i]->name);
     printf("    Files:\n");
-    for(int i=0; i<x->n_file; i++) printf("       %s\n", x->files[i]);
+    for(int i=0; i<x->n_file; i++) printf("         %s\n", x->files[i]);
 
     //TEST
     // printf("    %d %d", x->n_dir,x->n_file);
