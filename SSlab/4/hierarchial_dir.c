@@ -83,7 +83,7 @@ void add_subdir(struct dir *x){
     printf("        SubDirectory added\n");
 
     //Test
-    printf("    TEST %s %p", x->subdir[x->n_dir-1]->name, x->subdir[x->n_dir - 1]);
+    // printf("    TEST %s %p", x->subdir[x->n_dir-1]->name, x->subdir[x->n_dir - 1]);
 }
 
 void del_subdir(struct dir *x){
@@ -118,8 +118,8 @@ void del_subdir(struct dir *x){
 
 void print_currdir(struct dir *x[]){
 
-    printf("\n");
-    int i = 0;
+    printf("\n.");
+    int i = 1;
     while(x[i] != NULL){
         printf("/%s", x[i]->name);
         i++;
@@ -131,7 +131,7 @@ void print_currdir(struct dir *x[]){
 void display_dir(struct dir *x){
     printf("    Name: %s\n", x->name);
     printf("    SubDirectories:\n");
-    for(int i=0; i<x->n_dir; i++) printf("       %s %p\n", x->subdir[i]->name, x->subdir[i]);
+    for(int i=0; i<x->n_dir; i++) printf("       %s\n", x->subdir[i]->name);
     printf("    Files:\n");
     for(int i=0; i<x->n_file; i++) printf("       %s\n", x->files[i]);
 
@@ -139,10 +139,10 @@ void display_dir(struct dir *x){
     // printf("    %d %d", x->n_dir,x->n_file);
 }
 
-struct dir *getSubD(struct dir *x){
-    char str[10];
-    // printf("    Enter name of SubDirectory: ");
-    scanf("%s", str);
+struct dir *getSubD(struct dir *x, char str[]){
+    // char str[10];
+    // // printf("    Enter name of SubDirectory: ");
+    // scanf("%s", str);
     int i=0;
     while(i<x->n_dir && strcmp(str, x->subdir[i]->name)){
         i++;
@@ -161,63 +161,66 @@ struct dir *getSubD(struct dir *x){
 int main(){
 
     struct dir *curr_dir_list[20];
-    struct dir curr_dir;
+    struct dir *curr_dir;
     int depth = 1;
     for(int i=0; i<20; i++) curr_dir_list[i] = NULL;
 
+
+    //create root directory
     struct dir root;
     initialize_dir(&root);
     strcpy(root.name, "root");
     curr_dir_list[0] = &root;
 
     char cmd[10];
-    int curr_depth = 0;
 
-    printf("Controls:\n  dirp   : Goto parent directory\n  dirc   : Goto child directory\n");
+    printf("Controls:\n  cd   : Change Directory\n");
     printf("  mkdir  : Insert SubDirectory\n  rmdir  : Remove SubDirectory\n");
     printf("  mkfile : Insert File\n  rmfile : Remove File\n  ls     : List contents of directory\n\n");
 
     while(1){
-        curr_depth = depth;
-        curr_dir = *(curr_dir_list[depth-1]);
+
+        curr_dir = curr_dir_list[depth-1];
 
         print_currdir(curr_dir_list);
         scanf("%s", cmd);
 
-        if(strcmp(cmd,"dirp") == 0){
+        if(strcmp(cmd,"cd") == 0){
+            char tdir[10];
+            scanf("%s", tdir);
 
-            if(depth == 1){
-                printf("    Root directory reached");
+            if(strcmp("..", tdir) == 0){
+                if(depth == 1){
+                    printf("    Can't go any higher");
+                }
+                else{
+                curr_dir_list[depth-1] = NULL;
+                depth--;
+                }
             }
+        
             else{
-            curr_dir_list[depth-1] = curr_dir_list[depth];
-            depth--;
-            }
-        }
-        else if(strcmp(cmd,"dirc") == 0){
-
-            struct dir *temp = getSubD(&curr_dir);
-            curr_dir_list[depth] = temp;
-
-            if(temp != NULL){
-                depth++;
+                curr_dir_list[depth] = getSubD(curr_dir, tdir);
+                if(&curr_dir != NULL){
+                    depth++;
+                }
             }
             
         }
         else if(strcmp(cmd,"mkdir") == 0){
-            add_subdir(&curr_dir);
+            add_subdir(curr_dir);
         }
         else if(strcmp(cmd,"rmdir") == 0){
-            del_subdir(&curr_dir);
+            del_subdir(curr_dir);
         }
         else if(strcmp(cmd,"mkfile") == 0){
-            add_file(&curr_dir);
+            add_file(curr_dir);
         }
         else if(strcmp(cmd,"rmfile") == 0){
-            del_file(&curr_dir);
+            del_file(curr_dir);
         }
         else if(strcmp(cmd,"ls") == 0){
-            display_dir(&curr_dir);
+            display_dir(curr_dir);
         }
         else{
             printf("    Command not found");
