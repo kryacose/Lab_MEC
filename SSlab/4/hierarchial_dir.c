@@ -17,15 +17,25 @@ void initialize_dir(struct dir *x){
 }
 
 void add_file(struct dir *x){
+
+    char z[10];
+    scanf("%s", z);
+
     if(x->n_file>=5){
         printf("    Directory Full\n");
-        char z[10];
-        scanf("%s", z);
+        
         return;
     }
 
+    for(int i=0; i<x->n_file; i++){
+        if(strcmp(z,x->files[i]) == 0){
+            printf("        Already Exists\n");
+            return;
+        }
+    }
     // printf("    Enter File Name: ");
-    scanf("%s", x->files[x->n_file]);
+    // scanf("%s", x->files[x->n_file]);
+    strcpy(x->files[x->n_file], z);
     x->n_file++;
     printf("        File inserted\n");
 
@@ -70,7 +80,7 @@ void add_subdir(struct dir *x){
 
     for(int i=0; i<x->n_dir; i++){
         if(strcmp(z, x->subdir[i]->name) == 0){
-            printf("    Already Exists");
+            printf("        Already Exists\n");
             return;
         }
     }
@@ -137,7 +147,7 @@ void display_dir(struct dir *x){
     printf("    SubDirectories:\n");
     for(int i=0; i<x->n_dir; i++) printf("          %s\n", x->subdir[i]->name);
     printf("    Files:\n");
-    for(int i=0; i<x->n_file; i++) printf("         %s\n", x->files[i]);
+    for(int i=0; i<x->n_file; i++) printf("          %s\n", x->files[i]);
 
     //TEST
     // printf("    %d %d", x->n_dir,x->n_file);
