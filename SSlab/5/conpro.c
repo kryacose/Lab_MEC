@@ -4,7 +4,7 @@
 #include<time.h>
 #include<unistd.h>
 
-int wait(int *mutex)
+int wait(int *mutex)                                    //Hi
 {   
     while(*mutex == 0);
     *mutex = 0;
