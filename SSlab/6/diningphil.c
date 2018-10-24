@@ -3,7 +3,7 @@
 #include<omp.h>
 #include<time.h>
 #include<unistd.h>
-
+//eda hi im doing this for hacktober fest
 int wait(int *mutex)
 {   
     while(*mutex == 0);
