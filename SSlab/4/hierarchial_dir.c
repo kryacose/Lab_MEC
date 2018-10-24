@@ -16,11 +16,6 @@ void initialize_dir(struct dir *x){
         x->subdir[i] = NULL;
 }
 
-void name_dir(struct dir *x){
-    // printf("    Enter name of SubDirectory: ");
-    scanf("%s", x->name);
-}
-
 void add_file(struct dir *x){
     if(x->n_file>=5){
         printf("    Directory Full\n");
@@ -65,11 +60,19 @@ void del_file(struct dir *x){
 }
 
 void add_subdir(struct dir *x){
+    char z[10];
+    scanf("%s", z);
     if(x->n_dir>=5){
         printf("    Directory Full\n");
-        char z[10];
-        scanf("%s", z);
+        
         return;
+    }
+
+    for(int i=0; i<x->n_dir; i++){
+        if(strcmp(z, x->subdir[i]->name) == 0){
+            printf("    Already Exists");
+            return;
+        }
     }
 
     // struct dir subDirectory;
@@ -77,7 +80,8 @@ void add_subdir(struct dir *x){
     x->subdir[x->n_dir] = (struct dir*) malloc(sizeof(struct dir));
 
     initialize_dir(x->subdir[x->n_dir]);
-    name_dir(x->subdir[x->n_dir]);
+    // name_dir(x->subdir[x->n_dir]);
+    strcpy(x->subdir[x->n_dir]->name, z);
 
     x->n_dir++;
     printf("        SubDirectory added\n");
