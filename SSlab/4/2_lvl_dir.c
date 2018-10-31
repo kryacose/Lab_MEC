@@ -103,6 +103,8 @@ while(1)
                 }
             }
             break;
+            case 6: exit(0);
+        default: printf("Invalid choice!!\n")
     }
 }
 
