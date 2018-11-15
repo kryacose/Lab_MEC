@@ -19,3 +19,9 @@ simulate the folowing 3 optimization techniques:
 implement producer consumer problem using semaphores:
 
 write a program to simulate the working of dining philosiphers problem
+
+Implement pass 1 of a 2 pass assembler
+
+Implement pass 2 of a 2 pass assembler
+
+Implement symbol table using hashing

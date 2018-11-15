@@ -1,0 +1,9 @@
+LDA	00
+LDX 04
+LDL 08
+STA	0C
+STX 10
+STL 14
+ADD	18
+SUB	1C
+------
