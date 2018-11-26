@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<omp.h>
 #include<time.h>
-#include<unistd.h>
+#include<unistd.h>                         //Hi
 
 int wait(int *mutex)
 {   
