@@ -37,7 +37,7 @@ while(1)
                     printf("File created");
                     break;
                 }
-            if(i==dcnt)
+            if(i==dcnt)                                                    // Hi
                 printf("Directory %s not found",d);
             break;
         case 3: 
